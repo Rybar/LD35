@@ -25,6 +25,8 @@ Game.Load.prototype = {
         //init loading bar
 
         //load game assets
+        game.load.atlasXML('spr','./img/spr/sprites.png','./img/spr/sprites.xml');
+        console.log(game.cache);
 
     },
 

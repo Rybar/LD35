@@ -5856,13 +5856,13 @@ THREE.Ray.prototype = {
 
 			segCenter.copy( v0 ).add( v1 ).multiplyScalar( 0.5 );
 			segDir.copy( v1 ).sub( v0 ).normalize();
-			diff.copy( this.origin ).sub( segCenter );
+			delta.copy( this.origin ).sub( segCenter );
 
 			var segExtent = v0.distanceTo( v1 ) * 0.5;
 			var a01 = - this.direction.dot( segDir );
-			var b0 = diff.dot( this.direction );
-			var b1 = - diff.dot( segDir );
-			var c = diff.lengthSq();
+			var b0 = delta.dot( this.direction );
+			var b1 = - delta.dot( segDir );
+			var c = delta.lengthSq();
 			var det = Math.abs( 1 - a01 * a01 );
 			var s0, s1, sqrDist, extDet;
 
@@ -6198,8 +6198,8 @@ THREE.Ray.prototype = {
 
 			}
 
-			diff.subVectors( this.origin, a );
-			var DdQxE2 = sign * this.direction.dot( edge2.crossVectors( diff, edge2 ) );
+			delta.subVectors( this.origin, a );
+			var DdQxE2 = sign * this.direction.dot( edge2.crossVectors( delta, edge2 ) );
 
 			// b1 < 0, no intersection
 			if ( DdQxE2 < 0 ) {
@@ -6208,7 +6208,7 @@ THREE.Ray.prototype = {
 
 			}
 
-			var DdE1xQ = sign * this.direction.dot( edge1.cross( diff ) );
+			var DdE1xQ = sign * this.direction.dot( edge1.cross( delta ) );
 
 			// b2 < 0, no intersection
 			if ( DdE1xQ < 0 ) {
@@ -6225,7 +6225,7 @@ THREE.Ray.prototype = {
 			}
 
 			// Line intersects triangle, check if ray does.
-			var QdN = - sign * diff.dot( normal );
+			var QdN = - sign * delta.dot( normal );
 
 			// t < 0, no intersection
 			if ( QdN < 0 ) {
@@ -8080,14 +8080,14 @@ THREE.Clock.prototype = {
 
 			var newTime = performance.now();
 
-			diff = 0.001 * ( newTime - this.oldTime );
+			delta = 0.001 * ( newTime - this.oldTime );
 			this.oldTime = newTime;
 
-			this.elapsedTime += diff;
+			this.elapsedTime += delta;
 
 		}
 
-		return diff;
+		return delta;
 
 	}
 
@@ -10694,7 +10694,7 @@ THREE.Geometry.prototype = {
 
 		var diff = this.vertices.length - unique.length;
 		this.vertices = unique;
-		return diff;
+		return delta;
 
 	},
 
@@ -33912,7 +33912,7 @@ THREE.CurvePath.prototype.getPoint = function( t ) {
 			var diff = curveLengths[ i ] - d;
 			var curve = this.curves[ i ];
 
-			var u = 1 - diff / curve.getLength();
+			var u = 1 - delta / curve.getLength();
 
 			return curve.getPointAt( u );
 
@@ -35246,7 +35246,7 @@ THREE.LineCurve3 = THREE.Curve.create(
 
 		var vector = new THREE.Vector3();
 
-		vector.subVectors( this.v2, this.v1 ); // diff
+		vector.subVectors( this.v2, this.v1 ); // delta
 		vector.multiplyScalar( t );
 		vector.add( this.v1 );
 
@@ -38944,8 +38944,8 @@ THREE.ParametricGeometry = function ( func, slices, stacks ) {
 	// console.log(this);
 
 	// magic bullet
-	// var diff = this.mergeVertices();
-	// console.log('removed ', diff, ' vertices by merging');
+	// var delta = this.mergeVertices();
+	// console.log('removed ', delta, ' vertices by merging');
 
 	this.computeFaceNormals();
 	this.computeVertexNormals();

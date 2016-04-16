@@ -52541,7 +52541,7 @@ PIXI.WebGLGraphics.quadraticBezierCurve = function(fromX, fromY, cpX, cpY, toX, 
     function getPt(n1 , n2, perc) {
         var diff = n2 - n1;
 
-        return n1 + ( diff * perc );
+        return n1 + ( delta * perc );
     }
 
     var j = 0;
@@ -54140,7 +54140,7 @@ Phaser.Text.prototype.updateText = function () {
 
                     var diff = this.game.math.snapToCeil(lineWidth, tabs) - lineWidth;
 
-                    lineWidth += diff;
+                    lineWidth += delta;
                 }
             }
         }
@@ -59924,9 +59924,9 @@ Phaser.Math = {
         value = Math.abs(value);
         amount = Math.abs(amount);
         max = Math.abs(max);
-        diff = (value + amount) % max;
+        delta = (value + amount) % max;
 
-        return diff;
+        return delta;
 
     },
 
@@ -93157,7 +93157,7 @@ Phaser.TilemapLayer.prototype.getTiles = function (x, y, width, height, collides
     //  Convert the pixel values into tile coordinates
     var tx = Math.floor(x / (this._mc.cw * this.scale.x));
     var ty = Math.floor(y / (this._mc.ch * this.scale.y));
-    //  Don't just use ceil(width/cw) to allow account for x/y diff within cell
+    //  Don't just use ceil(width/cw) to allow account for x/y delta within cell
     var tw = Math.ceil((x + width) / (this._mc.cw * this.scale.x)) - tx;
     var th = Math.ceil((y + height) / (this._mc.ch * this.scale.y)) - ty;
 
