@@ -1,12 +1,12 @@
 Game = {};
 var w = 600;
-var h = 400;
+var h = 600;
 
 Game.Boot = function (game) {};
 
 Game.Boot.prototype = {
     preload: function () {
-        game.stage.backgroundColor = "#030303";
+        game.stage.backgroundColor = "#222035";
         //anything needed for loading screen goes here
     },
 
@@ -25,6 +25,7 @@ Game.Load.prototype = {
         //init loading bar
 
         //load game assets
+
     },
 
     create: function () {
